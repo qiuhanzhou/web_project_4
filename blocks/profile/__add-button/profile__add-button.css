@@ -1,9 +1,18 @@
 .profile__add-button {
-  justify-content: flex-end;
-  align-self: center;
+  background: url(../../../images/AddButton1.svg) no-repeat;
+  height: 50px;
+  width: 150px;
+  border: none;
+  background-color: transparent;
 }
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
   .profile__add-button {
-    align-self: flex-start;
+    background: url(../../../images/AddButton2.svg) no-repeat center;
+    width: 100%;
+    margin: auto;
   }
+}
+.profile__add-button:hover {
+  cursor: pointer;
+  opacity: 0.6;
 }

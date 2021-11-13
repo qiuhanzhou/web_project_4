@@ -1,4 +1,9 @@
+* {
+  box-sizing: border-box;
+}
+
 .page {
+  box-sizing: border-box;
   max-width: 1280px;
   margin: auto;
   padding: 45px 200px 60px;
@@ -8,12 +13,12 @@
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
   .page {
     padding: 28px 19px 36px;
   }

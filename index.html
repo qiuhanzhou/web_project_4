@@ -13,35 +13,113 @@
       <img src="./images/logo.svg" alt="logo" class="header__logo" />
     </header>
     <hr class="horizontal-line" />
-
-    <section class="profile">
-      <img
-        class="profile__image"
-        src="./images/avatar.png"
-        alt="profile image"
-      />
-      <div class="profile__info">
-        <h1 class="profile__info_name">Jacques Cousteau</h1>
-        <h2 class="profile__info_title">Explorer</h2>
+    <main class="main">
+      <section class="profile">
         <img
-          class="profile__info_edit-button"
-          src="./images/EditButton.png"
-          alt="edit button"
+          class="profile__avatar"
+          src="./images/avatar.png"
+          alt="profile avatar"
         />
-      </div>
-      <img
-        class="profile__add-button"
-        src="./images/Addbutton.png"
-        alt="add button"
-      />
-    </section>
+        <div class="profile__info">
+          <div class="profile__name-container">
+            <h1 class="profile__name">Jacques Cousteau</h1>
+            <button class="profile__edit-button"></button>
+          </div>
+          <p class="profile__title">Explorer</p>
+        </div>
+        <button
+          class="profile__add-button"
+          src="./images/Addbutton.png"
+          alt="add button"
+        ></button>
+      </section>
 
-    <section class="elements">
-      <div class="grid-elements"></div>
-    </section>
-
+      <section class="elements-grid">
+        <div class="elements-grid__grid-item card">
+          <img
+            src="./images/kirill-pershin-1088404-unsplash-1.png"
+            alt="Lago di Braies"
+          />
+          <div class="card__info">
+            <h2 class="card__title">Lago di Braies</h2>
+            <button class="card__like-button"></button>
+          </div>
+        </div>
+        <div class="elements-grid__grid-item card">
+          <img
+            src="./images/kirill-pershin-1088404-unsplash.png"
+            alt="yosemite"
+          />
+          <div class="card__info">
+            <h2 class="card__title">Yosemite Valley</h2>
+            <button class="card__like-button"></button>
+          </div>
+        </div>
+        <div class="elements-grid__grid-item card">
+          <img
+            src="./images/kirill-pershin-1404681-unsplash-1.png"
+            alt="latemar"
+          />
+          <div class="card__info">
+            <h2 class="card__title">Latemar</h2>
+            <button class="card__like-button"></button>
+          </div>
+        </div>
+        <div class="elements-grid__grid-item card">
+          <img
+            src="./images//kirill-pershin-1404681-unsplash.png"
+            alt="lake louise"
+          />
+          <div class="card__info">
+            <h2 class="card__title">Lake Louise</h2>
+            <button class="card__like-button"></button>
+          </div>
+        </div>
+        <div class="elements-grid__grid-item card">
+          <img
+            src="./images//kirill-pershin-1556355-unsplash-1 .png"
+            alt="Vanoise National Park"
+          />
+          <div class="card__info">
+            <h2 class="card__title">Vanoise National Park</h2>
+            <button class="card__like-button"></button>
+          </div>
+        </div>
+        <div class="elements-grid__grid-item card">
+          <img
+            src="./images//kirill-pershin-1556355-unsplash.png"
+            alt="Bald Mountains"
+          />
+          <div class="card__info">
+            <h2 class="card__title">Bald Mountains</h2>
+            <button class="card__like-button"></button>
+          </div>
+        </div>
+      </section>
+      <section class="modal">
+        <div class="modal__content">
+          <button class="modal__close-button"></button>
+          <h1 class="modal__title">Edit profile</h1>
+          <form class="modal__form">
+            <input
+              name="name"
+              type="text"
+              class="modal__input"
+              placeholder="Jacques Cousteau"
+            />
+            <input
+              name="title"
+              type="text"
+              class="modal__input"
+              placeholder="Explorer"
+            />
+            <button type="submit" class="modal__submit-button">Save</button>
+          </form>
+        </div>
+      </section>
+    </main>
     <footer class="footer">
-      <img src="./images/Around The U.S.png" alt="footer" />
+      <img class="footer__logo" src="./images/AroundTheU.S.png" alt="footer" />
     </footer>
     <script src="./script.js"></script>
   </body>
