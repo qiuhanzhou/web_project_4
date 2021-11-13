@@ -13,4 +13,4 @@ This projoect is a modern gallaery showing the beautiful places around the U.S. 
 Technologies used include HTML5, CSS3, javascript. Techniques used include CSS - flexbox, grid, responsive design; Javascript - event listensers, query selectors, conditional statements etc.
 
 **Github page**
-[Link to the Github page](https:)
+[Link to the Github page](https://qiuhanzhou.github.io/web_project_4/index.html)
