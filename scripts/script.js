@@ -22,7 +22,6 @@ function updateProfile(e) {
   editProfileModal.classList.remove('modal_open')
 }
 
-function toggleLikeState() {}
 openModalButton.addEventListener('click', openModal)
 editProfileCloseButton.addEventListener('click', closeModel)
 modalForm.addEventListener('submit', updateProfile)

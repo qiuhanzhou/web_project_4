@@ -22,11 +22,19 @@
         <div class="profile__info">
           <div class="profile__name-container">
             <h1 class="profile__name">Jacques Cousteau</h1>
-            <button type="submit" class="profile__edit-button"></button>
+            <button
+              type="button"
+              aria-label="edit"
+              class="profile__edit-button"
+            ></button>
           </div>
           <p class="profile__title">Explorer</p>
         </div>
-        <button type="submit" class="profile__add-button"></button>
+        <button
+          type="button"
+          aria-label="add"
+          class="profile__add-button"
+        ></button>
       </section>
 
       <section class="elements-grid">
@@ -37,7 +45,11 @@
           />
           <div class="card__info">
             <h2 class="card__title">Lago di Braies</h2>
-            <button type="submit" class="card__like-button"></button>
+            <button
+              type="button"
+              aria-label="like"
+              class="card__like-button"
+            ></button>
           </div>
         </div>
         <div class="elements-grid__grid-item card">
@@ -47,7 +59,11 @@
           />
           <div class="card__info">
             <h2 class="card__title">Yosemite Valley</h2>
-            <button type="submit" class="card__like-button"></button>
+            <button
+              type="button"
+              aria-label="like"
+              class="card__like-button"
+            ></button>
           </div>
         </div>
         <div class="elements-grid__grid-item card">
@@ -58,8 +74,8 @@
           <div class="card__info">
             <h2 class="card__title">Latemar</h2>
             <button
-              type="submit"
-              type="submit"
+              type="button"
+              aria-label="like"
               class="card__like-button"
             ></button>
           </div>
@@ -71,7 +87,11 @@
           />
           <div class="card__info">
             <h2 class="card__title">Lake Louise</h2>
-            <button type="submit" class="card__like-button"></button>
+            <button
+              type="button"
+              aria-label="like"
+              class="card__like-button"
+            ></button>
           </div>
         </div>
         <div class="elements-grid__grid-item card">
@@ -81,7 +101,11 @@
           />
           <div class="card__info">
             <h2 class="card__title">Vanoise National Park</h2>
-            <button type="submit" class="card__like-button"></button>
+            <button
+              type="button"
+              aria-label="like"
+              class="card__like-button"
+            ></button>
           </div>
         </div>
         <div class="elements-grid__grid-item card">
@@ -91,7 +115,11 @@
           />
           <div class="card__info">
             <h2 class="card__title">Bald Mountains</h2>
-            <button type="submit" class="card__like-button"></button>
+            <button
+              type="button"
+              aria-label="like"
+              class="card__like-button"
+            ></button>
           </div>
         </div>
       </section>
@@ -101,7 +129,11 @@
     </footer>
     <div class="modal">
       <div class="modal__content">
-        <button type="submit" class="modal__close-button"></button>
+        <button
+          type="button"
+          aria-label="close"
+          class="modal__close-button"
+        ></button>
         <h2 class="modal__title">Edit profile</h2>
         <form class="modal__form" name="modal-form">
           <input
@@ -116,10 +148,16 @@
             class="modal__input"
             placeholder="Explorer"
           />
-          <button type="submit" class="modal__submit-button">Save</button>
+          <button
+            type="submit"
+            aria-label="submit"
+            class="modal__submit-button"
+          >
+            Save
+          </button>
         </form>
       </div>
     </div>
-    <script src="./script.js"></script>
+    <script src="./scripts/script.js"></script>
   </body>
 </html>
