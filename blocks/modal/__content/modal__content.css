@@ -1,11 +1,11 @@
 .modal__content {
+  box-sizing: border-box;
   background: #ffffff;
   color: black;
   width: 430px;
   position: relative;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
-  margin: 195px auto 0;
   padding: 34px 36px 0px;
 }
 @media screen and (max-width: 768px) {

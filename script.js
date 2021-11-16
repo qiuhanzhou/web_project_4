@@ -4,31 +4,25 @@ const openModalButton = document.querySelector('.profile__edit-button')
 const modalForm = document.querySelector('.modal__form')
 const profileName = document.querySelector('.profile__name')
 const profileTitile = document.querySelector('.profile__title')
+const likeButtons = document.querySelectorAll('.card__like-button')
 
-function openModal(e) {
+function openModal() {
   editProfileModal.classList.add('modal_open')
+  modalForm.name.value = profileName.textContent
+  modalForm.title.value = profileTitile.textContent
 }
-function editProfile(e) {
-  //close modal by clicking the close button or clicking outside the modal content
-  if (
-    e.target === editProfileCloseButton ||
-    e.target.classList.contains('modal')
-  ) {
-    editProfileModal.classList.remove('modal_open')
-  }
+function closeModel() {
+  editProfileModal.classList.remove('modal_open')
 }
 
 function updateProfile(e) {
   e.preventDefault()
-  const name = modalForm.name.value
-  const title = modalForm.title.value
-
-  console.log(modalForm.name.value)
-
-  profileName.textContent = name
-  profileTitile.textContent = title
+  profileName.textContent = modalForm.name.value
+  profileTitile.textContent = modalForm.title.value
   editProfileModal.classList.remove('modal_open')
 }
+
+function toggleLikeState() {}
 openModalButton.addEventListener('click', openModal)
-editProfileModal.addEventListener('click', editProfile)
+editProfileCloseButton.addEventListener('click', closeModel)
 modalForm.addEventListener('submit', updateProfile)

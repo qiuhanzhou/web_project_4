@@ -13,7 +13,7 @@
   opacity: 0.5;
 }
 
-.card__like-button:active {
+.card__like-button_active {
   background: url(../../../images/likebutton_active.svg) no-repeat;
   opacity: 1;
 }
