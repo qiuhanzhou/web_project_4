@@ -19,7 +19,7 @@ function updateProfile(e) {
   e.preventDefault()
   profileName.textContent = modalForm.name.value
   profileTitile.textContent = modalForm.title.value
-  editProfileModal.classList.remove('modal_open')
+  closeModel()
 }
 
 openModalButton.addEventListener('click', openModal)
