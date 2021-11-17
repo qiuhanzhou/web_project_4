@@ -1,0 +1,4 @@
+.card__like-button_full {
+  background: url(../../../images/likebutton_active.svg) no-repeat;
+  opacity: 1;
+}
