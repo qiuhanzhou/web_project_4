@@ -1,3 +1,9 @@
 .card__like-button_full {
   background: url(../../../../images/likebutton_active.svg) no-repeat;
+  align-self: center;
+  justify-content: flex-end;
+  height: 19px;
+  width: 21px;
+  border: none;
+  flex-shrink: 0;
 }

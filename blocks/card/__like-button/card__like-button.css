@@ -1,6 +1,6 @@
 .card__like-button,
 .card__like-button:disabled {
-  background: url(../../../../images/like.svg) no-repeat;
+  background: url(../../../images/like.svg) no-repeat;
   align-self: center;
   justify-content: flex-end;
   height: 19px;

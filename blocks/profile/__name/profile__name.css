@@ -20,6 +20,6 @@
 }
 @media screen and (max-width: 320px) {
   .profile__name {
-    max-width: 192px;
+    max-width: 200px;
   }
 }
