@@ -1,27 +1,129 @@
-const editProfileModal = document.querySelector('.modal')
-const editProfileCloseButton = document.querySelector('.modal__close-button')
-const openModalButton = document.querySelector('.profile__edit-button')
-const modalForm = document.querySelector('.modal__form')
+const editProfileModal = document.querySelector('#edit-profile-modal')
+const addCardModal = document.querySelector('#add-card-modal')
+const imageModal = document.querySelector('#image-modal')
+const modalCloseButtons = document.querySelectorAll('.modal__close-button')
+const editProfileButton = document.querySelector('.profile__edit-button')
 const profileName = document.querySelector('.profile__name')
 const profileTitile = document.querySelector('.profile__title')
 const likeButtons = document.querySelectorAll('.card__like-button')
+const cardsContainer = document.querySelector('.cards-container')
+const addCardButton = document.querySelector('.profile__add-button')
+const editProfileModalForm = document.getElementById('edit-profile')
+const addCardModalForm = document.getElementById('add-card')
+const modalImage = document.querySelector('.modal__image')
+const modalCaption = document.querySelector('.modal__caption')
+const initialCards = [
+  {
+    name: 'Yosemite Valley',
+    link: 'https://code.s3.yandex.net/web-code/yosemite.jpg',
+  },
+  {
+    name: 'Lake Louise',
+    link: 'https://code.s3.yandex.net/web-code/lake-louise.jpg',
+  },
+  {
+    name: 'Bald Mountains',
+    link: 'https://code.s3.yandex.net/web-code/bald-mountains.jpg',
+  },
+  {
+    name: 'Latemar',
+    link: 'https://code.s3.yandex.net/web-code/latemar.jpg',
+  },
+  {
+    name: 'Vanoise National Park',
+    link: 'https://code.s3.yandex.net/web-code/vanoise.jpg',
+  },
+  {
+    name: 'Lago di Braies',
+    link: 'https://code.s3.yandex.net/web-code/lago.jpg',
+  },
+]
 
-function openModal() {
-  editProfileModal.classList.add('modal_open')
-  modalForm.name.value = profileName.textContent
-  modalForm.title.value = profileTitile.textContent
-}
-function closeModel() {
-  editProfileModal.classList.remove('modal_open')
+function createCard(data) {
+  const cardTemplate = document.querySelector('#card-template').content
+  const cardElement = cardTemplate.querySelector('.card').cloneNode(true)
+  cardElement.querySelector('.card__image').src = data.link
+  cardElement.querySelector('.card__image').alt = data.name
+  cardElement.querySelector('.card__title').textContent = data.name
+  return cardElement
 }
 
-function updateProfile(e) {
+function renderCard(data) {
+  const newCard = createCard(data)
+  cardsContainer.append(newCard)
+
+  const likeButton = newCard.querySelector('.card__like-button')
+  const deleteButton = newCard.querySelector('.card__close-button')
+  const cardImage = newCard.querySelector('.card__image')
+
+  function onClickLikeButtonHandler(e) {
+    e.target.classList.toggle('card__like-button_full')
+  }
+  function onClickDeleteButtonHandler(e) {
+    newCard.remove()
+  }
+  function onClickImageHandler(e) {
+    openModal(imageModal)
+    modalImage.src = e.target.src
+    modalCaption.textContent = e.target.alt
+  }
+  likeButton.addEventListener('click', onClickLikeButtonHandler)
+  deleteButton.addEventListener('click', onClickDeleteButtonHandler)
+  cardImage.addEventListener('click', onClickImageHandler)
+}
+
+function openModal(modal) {
+  modal.classList.add('modal_open')
+}
+
+function openEditProfileModal() {
+  editProfileModalForm.name.value = profileName.textContent
+  editProfileModalForm.title.value = profileTitile.textContent
+  openModal(editProfileModal)
+}
+
+function openAddCardModal() {
+  // reset add card form value
+  addCardModalForm.title.value = ''
+  addCardModalForm.url.value = ''
+  openModal(addCardModal)
+}
+
+function closeModel(modal) {
+  modal.classList.remove('modal_open')
+}
+function editSubmitHandler(e) {
   e.preventDefault()
-  profileName.textContent = modalForm.name.value
-  profileTitile.textContent = modalForm.title.value
-  closeModel()
+  profileName.textContent = editProfileModalForm.name.value
+  profileTitile.textContent = editProfileModalForm.title.value
+  closeModel(editProfileModal)
+}
+function addCardSubmitHandler(e) {
+  e.preventDefault()
+  let newCard = {}
+  newCard.name = addCardModalForm.title.value
+  newCard.link = addCardModalForm.url.value
+  renderCard(newCard)
+  closeModel(addCardModal)
 }
 
-openModalButton.addEventListener('click', openModal)
-editProfileCloseButton.addEventListener('click', closeModel)
-modalForm.addEventListener('submit', updateProfile)
+initialCards.forEach((card) => {
+  renderCard(card)
+})
+
+modalCloseButtons.forEach((modalCloseButton) => {
+  modalCloseButton.addEventListener('click', () => {
+    const modal = modalCloseButton.closest('.modal')
+    closeModel(modal)
+  })
+})
+
+editProfileButton.addEventListener('click', () => {
+  openEditProfileModal()
+})
+addCardButton.addEventListener('click', () => {
+  openAddCardModal()
+})
+
+editProfileModalForm.addEventListener('submit', editSubmitHandler)
+addCardModalForm.addEventListener('submit', addCardSubmitHandler)

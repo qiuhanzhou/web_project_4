@@ -35,97 +35,15 @@
         ></button>
       </section>
 
-      <section class="elements-grid">
-        <div class="elements-grid__grid-item card">
-          <img
-            src="./images/kirill-pershin-1088404-unsplash-1.png"
-            alt="Lago di Braies"
-          />
-          <div class="card__info">
-            <h2 class="card__title">Lago di Braies</h2>
-            <button
-              type="button"
-              aria-label="like"
-              class="card__like-button"
-            ></button>
-          </div>
-        </div>
-        <div class="elements-grid__grid-item card">
-          <img
-            src="./images/kirill-pershin-1088404-unsplash.png"
-            alt="yosemite"
-          />
-          <div class="card__info">
-            <h2 class="card__title">Yosemite Valley</h2>
-            <button
-              type="button"
-              aria-label="like"
-              class="card__like-button"
-            ></button>
-          </div>
-        </div>
-        <div class="elements-grid__grid-item card">
-          <img
-            src="./images/kirill-pershin-1404681-unsplash-1.png"
-            alt="latemar"
-          />
-          <div class="card__info">
-            <h2 class="card__title">Latemar</h2>
-            <button
-              type="button"
-              aria-label="like"
-              class="card__like-button"
-            ></button>
-          </div>
-        </div>
-        <div class="elements-grid__grid-item card">
-          <img
-            src="./images//kirill-pershin-1404681-unsplash.png"
-            alt="lake louise"
-          />
-          <div class="card__info">
-            <h2 class="card__title">Lake Louise</h2>
-            <button
-              type="button"
-              aria-label="like"
-              class="card__like-button"
-            ></button>
-          </div>
-        </div>
-        <div class="elements-grid__grid-item card">
-          <img
-            src="./images/kirill-pershin-1556355-unsplash-1.png"
-            alt="Vanoise National Park"
-          />
-          <div class="card__info">
-            <h2 class="card__title">Vanoise National Park</h2>
-            <button
-              type="button"
-              aria-label="like"
-              class="card__like-button"
-            ></button>
-          </div>
-        </div>
-        <div class="elements-grid__grid-item card">
-          <img
-            src="./images//kirill-pershin-1556355-unsplash.png"
-            alt="Bald Mountains"
-          />
-          <div class="card__info">
-            <h2 class="card__title">Bald Mountains</h2>
-            <button
-              type="button"
-              aria-label="like"
-              class="card__like-button"
-            ></button>
-          </div>
-        </div>
+      <section class="places">
+        <ul class="elements-grid cards-container"></ul>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__text">© 2021 Around The U.S.</p>
     </footer>
-    <div class="modal">
+
+    <div class="modal" id="edit-profile-modal">
       <div class="modal__content">
         <button
           type="button"
@@ -133,18 +51,18 @@
           class="modal__close-button"
         ></button>
         <h2 class="modal__title">Edit profile</h2>
-        <form class="modal__form" name="modal-form">
+        <form class="modal__form" name="edit-profile" id="edit-profile">
           <input
             name="name"
             type="text"
             class="modal__input"
-            placeholder="your name"
+            placeholder="Your name"
           />
           <input
             name="title"
             type="text"
             class="modal__input"
-            placeholder="your title"
+            placeholder="Your title"
           />
           <button
             type="submit"
@@ -156,6 +74,68 @@
         </form>
       </div>
     </div>
+    <div class="modal" id="add-card-modal">
+      <div class="modal__content">
+        <button
+          type="button"
+          aria-label="close"
+          class="modal__close-button"
+        ></button>
+        <h2 class="modal__title">New Place</h2>
+        <form class="modal__form" name="add-card" id="add-card">
+          <input
+            name="title"
+            type="text"
+            class="modal__input"
+            placeholder="Title of the new place"
+          />
+          <input
+            name="url"
+            type="text"
+            class="modal__input"
+            placeholder="Image link of the new place"
+          />
+          <button
+            type="submit"
+            aria-laƒbel="submit"
+            class="modal__submit-button"
+          >
+            Create
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="modal" id="image-modal">
+      <div class="modal__content modal__content_type_image">
+        <button
+          type="button"
+          aria-label="close"
+          class="modal__close-button modal__close-button_type_image"
+        ></button>
+        <img class="modal__image" src="" alt="" />
+        <p class="modal__caption"></p>
+      </div>
+    </div>
+
+    <template id="card-template">
+      <li class="card">
+        <button
+          type="button"
+          aria-label="close"
+          class="card__close-button"
+        ></button>
+        <img class="card__image" />
+        <div class="card__info">
+          <h2 class="card__title"></h2>
+          <button
+            type="button"
+            aria-label="like"
+            class="card__like-button"
+          ></button>
+        </div>
+      </li>
+    </template>
+
     <script src="./scripts/script.js"></script>
   </body>
 </html>
