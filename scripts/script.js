@@ -5,7 +5,6 @@ const modalCloseButtons = document.querySelectorAll('.modal__close-button')
 const editProfileButton = document.querySelector('.profile__edit-button')
 const profileName = document.querySelector('.profile__name')
 const profileTitile = document.querySelector('.profile__title')
-const likeButtons = document.querySelectorAll('.card__like-button')
 const cardsContainer = document.querySelector('.cards-container')
 const addCardButton = document.querySelector('.profile__add-button')
 const editProfileModalForm = document.getElementById('edit-profile')
@@ -45,31 +44,33 @@ function createCard(data) {
   cardElement.querySelector('.card__image').src = data.link
   cardElement.querySelector('.card__image').alt = data.name
   cardElement.querySelector('.card__title').textContent = data.name
-  return cardElement
-}
 
-function renderCard(data) {
-  const newCard = createCard(data)
-  cardsContainer.append(newCard)
-
-  const likeButton = newCard.querySelector('.card__like-button')
-  const deleteButton = newCard.querySelector('.card__close-button')
-  const cardImage = newCard.querySelector('.card__image')
+  const likeButton = cardElement.querySelector('.card__like-button')
+  const deleteButton = cardElement.querySelector('.card__close-button')
+  const cardImage = cardElement.querySelector('.card__image')
 
   function onClickLikeButtonHandler(e) {
     e.target.classList.toggle('card__like-button_full')
   }
   function onClickDeleteButtonHandler(e) {
-    newCard.remove()
+    cardElement.remove()
   }
   function onClickImageHandler(e) {
     openModal(imageModal)
     modalImage.src = e.target.src
+    modalImage.alt = e.target.alt
     modalCaption.textContent = e.target.alt
   }
   likeButton.addEventListener('click', onClickLikeButtonHandler)
   deleteButton.addEventListener('click', onClickDeleteButtonHandler)
   cardImage.addEventListener('click', onClickImageHandler)
+
+  return cardElement
+}
+
+function renderCard(data) {
+  const newCard = createCard(data)
+  cardsContainer.prepend(newCard)
 }
 
 function openModal(modal) {
@@ -89,22 +90,22 @@ function openAddCardModal() {
   openModal(addCardModal)
 }
 
-function closeModel(modal) {
+function closeModal(modal) {
   modal.classList.remove('modal_open')
 }
 function editSubmitHandler(e) {
   e.preventDefault()
   profileName.textContent = editProfileModalForm.name.value
   profileTitile.textContent = editProfileModalForm.title.value
-  closeModel(editProfileModal)
+  closeModal(editProfileModal)
 }
 function addCardSubmitHandler(e) {
   e.preventDefault()
-  let newCard = {}
+  const newCard = {}
   newCard.name = addCardModalForm.title.value
   newCard.link = addCardModalForm.url.value
   renderCard(newCard)
-  closeModel(addCardModal)
+  closeModal(addCardModal)
 }
 
 initialCards.forEach((card) => {
@@ -114,7 +115,7 @@ initialCards.forEach((card) => {
 modalCloseButtons.forEach((modalCloseButton) => {
   modalCloseButton.addEventListener('click', () => {
     const modal = modalCloseButton.closest('.modal')
-    closeModel(modal)
+    closeModal(modal)
   })
 })
 
