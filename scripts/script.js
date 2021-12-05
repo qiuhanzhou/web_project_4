@@ -1,6 +1,7 @@
 const editProfileModal = document.querySelector('#edit-profile-modal')
 const addCardModal = document.querySelector('#add-card-modal')
 const imageModal = document.querySelector('#image-modal')
+const allModals = document.querySelectorAll('.modal')
 const modalCloseButtons = document.querySelectorAll('.modal__close-button')
 const editProfileButton = document.querySelector('.profile__edit-button')
 const profileName = document.querySelector('.profile__name')
@@ -11,6 +12,7 @@ const editProfileModalForm = document.getElementById('edit-profile')
 const addCardModalForm = document.getElementById('add-card')
 const modalImage = document.querySelector('.modal__image')
 const modalCaption = document.querySelector('.modal__caption')
+
 const initialCards = [
   {
     name: 'Yosemite Valley',
@@ -79,7 +81,7 @@ function openModal(modal) {
 
 function openEditProfileModal() {
   editProfileModalForm.name.value = profileName.textContent
-  editProfileModalForm.title.value = profileTitile.textContent
+  editProfileModalForm.about.value = profileTitile.textContent
   openModal(editProfileModal)
 }
 
@@ -96,7 +98,7 @@ function closeModal(modal) {
 function editSubmitHandler(e) {
   e.preventDefault()
   profileName.textContent = editProfileModalForm.name.value
-  profileTitile.textContent = editProfileModalForm.title.value
+  profileTitile.textContent = editProfileModalForm.about.value
   closeModal(editProfileModal)
 }
 function addCardSubmitHandler(e) {
@@ -112,6 +114,11 @@ initialCards.forEach((card) => {
   renderCard(card)
 })
 
+function closeModalOutside(e) {
+  if (e.target.classList.contains('modal')) {
+    closeModal(e.target)
+  }
+}
 modalCloseButtons.forEach((modalCloseButton) => {
   modalCloseButton.addEventListener('click', () => {
     const modal = modalCloseButton.closest('.modal')
@@ -128,3 +135,9 @@ addCardButton.addEventListener('click', () => {
 
 editProfileModalForm.addEventListener('submit', editSubmitHandler)
 addCardModalForm.addEventListener('submit', addCardSubmitHandler)
+allModals.forEach((modal) => modal.addEventListener('click', closeModalOutside))
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    allModals.forEach((modal) => closeModal(modal))
+  }
+})

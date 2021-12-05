@@ -1,6 +1,5 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/inter.css);
-
 @import url(./blocks/page/page.css);
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__logo/header__logo.css);
@@ -34,3 +33,8 @@
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/places/places.css);
 @import url(./blocks/modal/__close-button/_type_image/modal__close-button_type_image.css);
+@import url(./blocks/modal/__form-field/modal__form-field.css);
+@import url(./blocks/modal/__error/modal__error.css);
+@import url(./blocks/modal/__error/_visible/modal__error_visible.css);
+@import url(./blocks/modal/__input/_type/modal__input_type_error.css);
+@import url(./blocks/modal/__submit-button/_disabled/modal__submit-button_disabled.css);

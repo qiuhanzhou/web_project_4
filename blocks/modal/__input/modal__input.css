@@ -7,9 +7,7 @@
   font-size: 14px;
   line-height: 17px;
 }
-.modal__input:first-of-type {
-  margin-bottom: 30px;
-}
+
 @media screen and (max-width: 768px) {
   .modal__input {
     padding: 0 0 9px;

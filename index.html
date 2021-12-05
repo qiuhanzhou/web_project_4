@@ -52,18 +52,33 @@
         ></button>
         <h2 class="modal__title">Edit profile</h2>
         <form class="modal__form" name="edit-profile" id="edit-profile">
-          <input
-            name="name"
-            type="text"
-            class="modal__input"
-            placeholder="Your name"
-          />
-          <input
-            name="title"
-            type="text"
-            class="modal__input"
-            placeholder="Your title"
-          />
+          <label class="modal__form-field">
+            <input
+              name="name"
+              type="text"
+              class="modal__input"
+              id="name-input"
+              placeholder="Your name"
+              required
+              minlength="2"
+              maxlength="40"
+            />
+            <span class="modal__error name-input-error"></span>
+          </label>
+
+          <label class="modal__form-field">
+            <input
+              name="about"
+              type="text"
+              class="modal__input"
+              id="about-input"
+              placeholder="About you"
+              required
+              minlength="2"
+              maxlength="200"
+            />
+            <span class="modal__error about-input-error"></span>
+          </label>
           <button
             type="submit"
             aria-label="submit"
@@ -82,22 +97,37 @@
           class="modal__close-button"
         ></button>
         <h2 class="modal__title">New Place</h2>
+
         <form class="modal__form" name="add-card" id="add-card">
-          <input
-            name="title"
-            type="text"
-            class="modal__input"
-            placeholder="Title of the new place"
-          />
-          <input
-            name="url"
-            type="text"
-            class="modal__input"
-            placeholder="Image link of the new place"
-          />
+          <label class="modal__form-field">
+            <input
+              name="title"
+              type="text"
+              class="modal__input"
+              id="title-input"
+              placeholder="Title of the new place"
+              required
+              minlength="1"
+              maxlength="30"
+            />
+            <span class="modal__error title-input-error"></span>
+          </label>
+
+          <label class="modal__form-field">
+            <input
+              name="url"
+              type="url"
+              class="modal__input"
+              placeholder="Image link of the new place"
+              id="url-input"
+              required
+            />
+            <span class="modal__error url-input-error"></span>
+          </label>
+
           <button
             type="submit"
-            aria-laƒbel="submit"
+            aria-label="submit"
             class="modal__submit-button"
           >
             Create
@@ -135,7 +165,7 @@
         </div>
       </li>
     </template>
-
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/script.js"></script>
   </body>
 </html>
