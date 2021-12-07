@@ -43,13 +43,13 @@ const initialCards = [
 function createCard(data) {
   const cardTemplate = document.querySelector('#card-template').content
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true)
-  cardElement.querySelector('.card__image').src = data.link
-  cardElement.querySelector('.card__image').alt = data.name
-  cardElement.querySelector('.card__title').textContent = data.name
-
   const likeButton = cardElement.querySelector('.card__like-button')
   const deleteButton = cardElement.querySelector('.card__close-button')
   const cardImage = cardElement.querySelector('.card__image')
+
+  cardImage.src = data.link
+  cardImage.alt = data.name
+  cardElement.querySelector('.card__title').textContent = data.name
 
   function onClickLikeButtonHandler(e) {
     e.target.classList.toggle('card__like-button_full')
@@ -76,6 +76,7 @@ function renderCard(data) {
 }
 
 function openModal(modal) {
+  document.addEventListener('keydown', closeModalByEscape)
   modal.classList.add('modal_open')
 }
 
@@ -89,10 +90,18 @@ function openAddCardModal() {
   // reset add card form value
   addCardModalForm.title.value = ''
   addCardModalForm.url.value = ''
+  //open modal
   openModal(addCardModal)
+  //disable the submit button
+  const addCardSubmitButton = addCardModalForm.querySelector(
+    '.modal__submit-button',
+  )
+  addCardSubmitButton.classList.add('modal__submit-button_disabled')
+  addCardSubmitButton.disabled = true
 }
 
 function closeModal(modal) {
+  document.removeEventListener('keydown', closeModalByEscape)
   modal.classList.remove('modal_open')
 }
 function editSubmitHandler(e) {
@@ -114,16 +123,25 @@ initialCards.forEach((card) => {
   renderCard(card)
 })
 
-function closeModalOutside(e) {
-  if (e.target.classList.contains('modal')) {
-    closeModal(e.target)
+function closeModalByCloseAndOverlay(e) {
+  if (e.target.classList.contains('modal__close-button')) {
+    closeModal(e.currentTarget)
+  }
+  if (e.target.classList.contains('modal_open')) {
+    closeModal(e.currentTarget)
   }
 }
-modalCloseButtons.forEach((modalCloseButton) => {
-  modalCloseButton.addEventListener('click', () => {
-    const modal = modalCloseButton.closest('.modal')
-    closeModal(modal)
-  })
+
+function closeModalByEscape(e) {
+  if (e.key === 'Escape') {
+    const openedModal = document.querySelector('.modal_open')
+    console.log(openedModal)
+    closeModal(openedModal)
+  }
+}
+
+allModals.forEach((modal) => {
+  modal.addEventListener('click', closeModalByCloseAndOverlay)
 })
 
 editProfileButton.addEventListener('click', () => {
@@ -135,9 +153,3 @@ addCardButton.addEventListener('click', () => {
 
 editProfileModalForm.addEventListener('submit', editSubmitHandler)
 addCardModalForm.addEventListener('submit', addCardSubmitHandler)
-allModals.forEach((modal) => modal.addEventListener('click', closeModalOutside))
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    allModals.forEach((modal) => closeModal(modal))
-  }
-})

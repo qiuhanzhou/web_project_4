@@ -24,16 +24,16 @@ function checkInputValidity(inputEl, formEl, settings) {
 
 // check if any field doesn't pass validation within a form
 function hasInvalidInput(inputEl, formEl, settings, inputList) {
-  console.log(inputEl, formEl, settings, inputList)
   return !inputList.every((input) => input.validity.valid)
 }
 
 function updateButtonState(inputEl, formEl, settings, submitButton, inputList) {
-  console.log(inputEl, formEl, settings, submitButton)
   if (hasInvalidInput(inputEl, formEl, settings, inputList)) {
     submitButton.classList.add(settings.inactiveButtonClass)
+    submitButton.disabled = true
   } else {
     submitButton.classList.remove(settings.inactiveButtonClass)
+    submitButton.disabled = false
   }
 }
 
