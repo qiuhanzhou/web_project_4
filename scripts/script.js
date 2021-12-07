@@ -135,7 +135,6 @@ function closeModalByCloseAndOverlay(e) {
 function closeModalByEscape(e) {
   if (e.key === 'Escape') {
     const openedModal = document.querySelector('.modal_open')
-    console.log(openedModal)
     closeModal(openedModal)
   }
 }
