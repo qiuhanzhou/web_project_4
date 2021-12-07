@@ -123,11 +123,11 @@ initialCards.forEach((card) => {
   renderCard(card)
 })
 
-function closeModalByCloseAndOverlay(e) {
-  if (e.target.classList.contains('modal__close-button')) {
-    closeModal(e.currentTarget)
-  }
-  if (e.target.classList.contains('modal_open')) {
+function closeModalByButtonAndOverlay(e) {
+  if (
+    e.target.classList.contains('modal__close-button') ||
+    e.target.classList.contains('modal_open')
+  ) {
     closeModal(e.currentTarget)
   }
 }
@@ -140,7 +140,7 @@ function closeModalByEscape(e) {
 }
 
 allModals.forEach((modal) => {
-  modal.addEventListener('click', closeModalByCloseAndOverlay)
+  modal.addEventListener('click', closeModalByButtonAndOverlay)
 })
 
 editProfileButton.addEventListener('click', () => {

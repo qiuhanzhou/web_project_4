@@ -9,3 +9,8 @@
   background-color: transparent;
   padding: 0;
 }
+
+.card__close-button:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
