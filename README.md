@@ -7,10 +7,13 @@
 - Link to the Github page
 
 **Description of project and functionality**
-This projoect is a modern gallaery showing the beautiful places around the U.S. It allows the users to edit their profile info, click on the ones they like and add more photos if they wish.
+
+This website is a similar version of instagram where a user can display a customized gallery of places around the U.S. It allows the users to edit their profile info, add/delete places, click on the ones they like. etc. 
 
 **Technologies and techniques used**
-Technologies used include HTML5, CSS3, javascript. Techniques used include CSS - flexbox, grid, responsive design; Javascript - event listensers, query selectors, conditional statements etc.
+
+Technologies used include HTML5, CSS3, javascript. Techniques used include CSS - BEM file structure, flexbox, grid, responsive design; Javascript - DOM manipulation, event listensers, form submission, input validity check, modular structure. 
 
 **Github page**
-[Link to the Github page](https://qiuhanzhou.github.io/web_project_4/index.html)
+
+[Link to the Github page] (https://qiuhanzhou.github.io/web_project_4/index.html)
