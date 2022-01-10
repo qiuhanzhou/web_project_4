@@ -6,7 +6,7 @@ import {
   profileName,
   profileTitile,
 } from './script.js'
-
+import { renderCard } from './script.js'
 function closeModalByEscape(e) {
   if (e.key === 'Escape') {
     const openedModal = document.querySelector('.modal_open')

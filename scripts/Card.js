@@ -31,7 +31,7 @@ export default class Card {
   }
 
   _handleModalToggleLike(e) {
-    this._element.classList.toggle('card__like-button_full')
+    e.target.classList.toggle('card__like-button_full')
   }
 
   _handleModalClose(e) {
@@ -60,7 +60,7 @@ export default class Card {
     this._element
       .querySelector('.card__like-button')
       .addEventListener('click', (e) => {
-        this._handleToggleLikePopup(e)
+        this._handleModalToggleLike(e)
       })
   }
 }

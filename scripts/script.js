@@ -100,4 +100,5 @@ export {
   profileName,
   addCardModal,
   profileTitile,
+  renderCard,
 }
