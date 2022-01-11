@@ -7,6 +7,7 @@ import {
   profileTitile,
 } from './script.js'
 import { renderCard } from './script.js'
+
 function closeModalByEscape(e) {
   if (e.key === 'Escape') {
     const openedModal = document.querySelector('.modal_open')
@@ -38,18 +39,14 @@ function openEditProfileModal() {
   openModal(editProfileModal)
 }
 
-function openAddCardModal() {
+function openAddCardModal(formValidator) {
   // reset add card form value
   addCardModalForm.title.value = ''
   addCardModalForm.url.value = ''
   //open modal
   openModal(addCardModal)
-  //disable the submit button
-  const addCardSubmitButton = addCardModalForm.querySelector(
-    '.modal__submit-button',
-  )
-  addCardSubmitButton.classList.add('modal__submit-button_disabled')
-  addCardSubmitButton.disabled = true
+  //disable the submit button by calling form instance's method
+  formValidator.updateButtonState()
 }
 
 function editSubmitHandler(e) {

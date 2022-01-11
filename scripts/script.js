@@ -59,6 +59,12 @@ const validationConfig = {
   errorClass: 'modal__error_visible',
 }
 
+const addFormValidator = new FormValidator(validationConfig, addCardModalForm)
+const editFormValidator = new FormValidator(
+  validationConfig,
+  editProfileModalForm,
+)
+
 function renderCard(data) {
   const newCard = new Card(data, cardSelector).generateCard()
   cardsContainer.prepend(newCard)
@@ -72,7 +78,7 @@ editProfileButton.addEventListener('click', () => {
   openEditProfileModal()
 })
 addCardButton.addEventListener('click', () => {
-  openAddCardModal()
+  openAddCardModal(addFormValidator)
 })
 
 editProfileModalForm.addEventListener('submit', editSubmitHandler)
@@ -82,11 +88,6 @@ initialCards.forEach((cardData) => {
   renderCard(cardData)
 })
 
-const addFormValidator = new FormValidator(validationConfig, addCardModalForm)
-const editFormValidator = new FormValidator(
-  validationConfig,
-  editProfileModalForm,
-)
 addFormValidator.enableValidation()
 editFormValidator.enableValidation()
 

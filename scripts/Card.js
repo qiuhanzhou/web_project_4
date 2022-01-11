@@ -5,7 +5,6 @@ export default class Card {
   constructor(data, cardSelector) {
     this._title = data.name
     this._imageUrl = data.link
-
     this._cardSelector = cardSelector
   }
 
@@ -20,12 +19,15 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate()
-    this._setEventListeners()
+    this._cardImage = this._element.querySelector('.card__image')
+    this._cardTitle = this._element.querySelector('.card__title')
+    this._deleteButton = this._element.querySelector('.card__close-button')
+    this._likeButton = this._element.querySelector('.card__like-button')
 
-    const cardImage = this._element.querySelector('.card__image')
-    cardImage.src = this._imageUrl
-    cardImage.alt = this._title
-    this._element.querySelector('.card__title').textContent = this._title
+    this._cardImage.src = this._imageUrl
+    this._cardImage.alt = this._title
+    this._cardTitle.textContent = this._title
+    this._setEventListeners()
 
     return this._element
   }
@@ -46,21 +48,15 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element
-      .querySelector('.card__image')
-      .addEventListener('click', (e) => {
-        this._handleCardImage(e)
-      })
+    this._cardImage.addEventListener('click', (e) => {
+      this._handleCardImage(e)
+    })
 
-    this._element
-      .querySelector('.card__close-button')
-      .addEventListener('click', (e) => {
-        this._handleModalClose(e)
-      })
-    this._element
-      .querySelector('.card__like-button')
-      .addEventListener('click', (e) => {
-        this._handleModalToggleLike(e)
-      })
+    this._deleteButton.addEventListener('click', (e) => {
+      this._handleModalClose(e)
+    })
+    this._likeButton.addEventListener('click', (e) => {
+      this._handleModalToggleLike(e)
+    })
   }
 }

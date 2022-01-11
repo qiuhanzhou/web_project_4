@@ -8,6 +8,12 @@ export default class FormValidator {
     this._errorClass = config.errorClass
 
     this._formElement = formElement
+    ;(this._inputList = Array.from(
+      this._formElement.querySelectorAll(this._inputSelector),
+    )),
+      (this._submitButton = this._formElement.querySelector(
+        this._submitButtonSelector,
+      ))
   }
 
   _showErrorMessage(inputEl, errorMessage) {
@@ -33,30 +39,24 @@ export default class FormValidator {
     }
   }
 
-  _hasInvalidInput(inputList) {
-    return !inputList.every((input) => input.validity.valid)
+  _hasInvalidInput() {
+    return !this._inputList.every((input) => input.validity.valid)
   }
 
-  _updateButtonState(inputEl, inputList, submitButton) {
-    if (this._hasInvalidInput(inputList)) {
-      submitButton.classList.add(this._inactiveButtonClass)
-      submitButton.disabled = true
+  updateButtonState() {
+    if (this._hasInvalidInput()) {
+      this._submitButton.classList.add(this._inactiveButtonClass)
+      this._submitButton.disabled = true
     } else {
-      submitButton.classList.remove(this._inactiveButtonClass)
-      submitButton.disabled = false
+      this._submitButton.classList.remove(this._inactiveButtonClass)
+      this._submitButton.disabled = false
     }
   }
 
   _setEventListeners() {
     //get all the inputs and submit buttons
-    const inputList = Array.from(
-      this._formElement.querySelectorAll(this._inputSelector),
-    )
-    const submitButton = this._formElement.querySelector(
-      this._submitButtonSelector,
-    )
 
-    inputList.forEach((inputEl) => {
+    this._inputList.forEach((inputEl) => {
       inputEl.addEventListener('input', () => {
         // check for validation
         this._checkInputValidity(inputEl)
@@ -64,7 +64,7 @@ export default class FormValidator {
         // update button state (disabled or not)
         //if any field doesn't pass validation, the button should be inactive. If both fields pass validation, then it should be active
 
-        this._updateButtonState(inputEl, inputList, submitButton)
+        this.updateButtonState()
       })
     })
   }
