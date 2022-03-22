@@ -1,11 +1,13 @@
-import { imageModal, modalImage, modalCaption } from './script.js'
+import { imageModal, modalImage, modalCaption } from '../page/index.js'
 import { openModal } from './utils.js'
+import Popup from './Popup.js'
 
 export default class Card {
-  constructor(data, cardSelector) {
-    this._title = data.name
-    this._imageUrl = data.link
+  constructor({ name, link }, cardSelector, handleCardClick) {
+    this._title = name
+    this._imageUrl = link
     this._cardSelector = cardSelector
+    this.handleCardClick = handleCardClick
   }
 
   _getTemplate() {
@@ -52,6 +54,7 @@ export default class Card {
       this._handleCardImage(e)
     })
 
+    //to bind this inside event handler
     this._deleteButton.addEventListener('click', (e) => {
       this._handleModalClose(e)
     })

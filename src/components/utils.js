@@ -5,8 +5,8 @@ import {
   addCardModal,
   profileName,
   profileTitile,
-} from './script.js'
-import { renderCard } from './script.js'
+} from '../page/index.js'
+import { renderCard } from '../page/index.js'
 
 function closeModalByEscape(e) {
   if (e.key === 'Escape') {

@@ -1,12 +1,15 @@
-import FormValidator from './FormValidator.js'
-import Card from './Card.js'
+import './index.css'
+
+import FormValidator from '../components/FormValidator.js'
+import Card from '../components/Card.js'
 import {
   closeModalByButtonAndOverlay,
   openEditProfileModal,
   openAddCardModal,
   editSubmitHandler,
   addCardSubmitHandler,
-} from './utils.js'
+} from '../components/utils.js'
+import './styles/index.css'
 
 const editProfileModal = document.querySelector('#edit-profile-modal')
 const addCardModal = document.querySelector('#add-card-modal')
@@ -65,8 +68,14 @@ const editFormValidator = new FormValidator(
   editProfileModalForm,
 )
 
+const popup = new Popup()
+
+function handleCardClick(e) {
+  popup.open()
+}
+
 function renderCard(data) {
-  const newCard = new Card(data, cardSelector).generateCard()
+  const newCard = new Card(data, cardSelector, handleCardClick).generateCard()
   cardsContainer.prepend(newCard)
 }
 
@@ -103,3 +112,7 @@ export {
   profileTitile,
   renderCard,
 }
+
+const numbers = [2, 3, 5]
+const doubledNumbers = numbers.map((number) => number * 2)
+console.log(doubledNumbers) // 4, 6, 10
