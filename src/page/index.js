@@ -1,118 +1,93 @@
 import './index.css'
 
-import FormValidator from '../components/FormValidator.js'
-import Card from '../components/Card.js'
+//import all the classes
 import {
-  closeModalByButtonAndOverlay,
-  openEditProfileModal,
-  openAddCardModal,
-  editSubmitHandler,
-  addCardSubmitHandler,
-} from '../components/utils.js'
-import './styles/index.css'
+  initialCards,
+  selectors,
+  validationConfig,
+  editProfileButton,
+  addCardButton,
+  profileNameEl,
+  profileTitleEl,
+  editProfileModalForm,
+  addCardModalForm,
+} from '../utils/constants'
+import FormValidator from '../components/FormValidator'
+import Card from '../components/Card'
+import Section from '../components/Section'
+import PopupWithImage from '../components/PopupWithImage'
+import PopupWithForm from '../components/PopupWithForm'
+import UserInfo from '../components/UserInfo'
 
-const editProfileModal = document.querySelector('#edit-profile-modal')
-const addCardModal = document.querySelector('#add-card-modal')
-const imageModal = document.querySelector('#image-modal')
-const allModals = document.querySelectorAll('.modal')
-const editProfileButton = document.querySelector('.profile__edit-button')
-const profileName = document.querySelector('.profile__name')
-const profileTitile = document.querySelector('.profile__title')
-const cardsContainer = document.querySelector('.cards-container')
-const addCardButton = document.querySelector('.profile__add-button')
-const editProfileModalForm = document.getElementById('edit-profile')
-const addCardModalForm = document.getElementById('add-card')
-const modalImage = document.querySelector('.modal__image')
-const modalCaption = document.querySelector('.modal__caption')
+//create instances of the classes
 
-const cardSelector = '#card-template'
-const initialCards = [
+const cardSection = new Section(
   {
-    name: 'Yosemite Valley',
-    link: 'https://code.s3.yandex.net/web-code/yosemite.jpg',
+    items: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, selectors.cardTemplate, handleCardClick)
+      const cardEl = card.generateCard()
+      cardSection.addItem(cardEl)
+    },
   },
-  {
-    name: 'Lake Louise',
-    link: 'https://code.s3.yandex.net/web-code/lake-louise.jpg',
-  },
-  {
-    name: 'Bald Mountains',
-    link: 'https://code.s3.yandex.net/web-code/bald-mountains.jpg',
-  },
-  {
-    name: 'Latemar',
-    link: 'https://code.s3.yandex.net/web-code/latemar.jpg',
-  },
-  {
-    name: 'Vanoise National Park',
-    link: 'https://code.s3.yandex.net/web-code/vanoise.jpg',
-  },
-  {
-    name: 'Lago di Braies',
-    link: 'https://code.s3.yandex.net/web-code/lago.jpg',
-  },
-]
-
-const validationConfig = {
-  formSelector: '.modal__form',
-  inputSelector: '.modal__input',
-  submitButtonSelector: '.modal__submit-button',
-  inactiveButtonClass: 'modal__submit-button_disabled',
-  inputErrorClass: 'modal__input_type_error',
-  errorClass: 'modal__error_visible',
-}
-
+  selectors.cardContainerSelector,
+)
 const addFormValidator = new FormValidator(validationConfig, addCardModalForm)
 const editFormValidator = new FormValidator(
   validationConfig,
   editProfileModalForm,
 )
 
-const popup = new Popup()
+const imagepopup = new PopupWithImage(selectors.imagePopupSelector)
+imagepopup.setEventListeners()
 
-function handleCardClick(e) {
-  popup.open()
-}
+const editProfilePopup = new PopupWithForm(
+  handleEditFormSubmit,
+  selectors.editProfilePopupSelector,
+)
+editProfilePopup.setEventListeners()
 
-function renderCard(data) {
-  const newCard = new Card(data, cardSelector, handleCardClick).generateCard()
-  cardsContainer.prepend(newCard)
-}
+const addCardPopup = new PopupWithForm(
+  handleAddCardFormSubmit,
+  selectors.addCardPopupSelector,
+)
+addCardPopup.setEventListeners()
 
-allModals.forEach((modal) => {
-  modal.addEventListener('click', closeModalByButtonAndOverlay)
+const profileUserInfo = new UserInfo({
+  userNameElement: profileNameEl,
+  userTitleElement: profileTitleEl,
 })
+
+//callbacks passed in as class constructor params
+
+function handleCardClick(data) {
+  imagepopup.open(data)
+}
+
+function handleEditFormSubmit([userName, title]) {
+  profileUserInfo.setUserInfo({
+    userName,
+    title,
+  })
+  editProfilePopup.close()
+}
+
+function handleAddCardFormSubmit([name, link]) {
+  const card = new Card({ name, link }, selectors.cardTemplate, handleCardClick)
+  const cardEl = card.generateCard()
+  cardSection.addItem(cardEl)
+  addCardPopup.close()
+}
+
+//initialize all my classes
+cardSection.renderItems()
 
 editProfileButton.addEventListener('click', () => {
-  openEditProfileModal()
+  editProfilePopup.open()
 })
 addCardButton.addEventListener('click', () => {
-  openAddCardModal(addFormValidator)
-})
-
-editProfileModalForm.addEventListener('submit', editSubmitHandler)
-addCardModalForm.addEventListener('submit', addCardSubmitHandler)
-
-initialCards.forEach((cardData) => {
-  renderCard(cardData)
+  addCardPopup.open()
 })
 
 addFormValidator.enableValidation()
 editFormValidator.enableValidation()
-
-export {
-  editProfileModal,
-  imageModal,
-  modalImage,
-  modalCaption,
-  addCardModalForm,
-  editProfileModalForm,
-  profileName,
-  addCardModal,
-  profileTitile,
-  renderCard,
-}
-
-const numbers = [2, 3, 5]
-const doubledNumbers = numbers.map((number) => number * 2)
-console.log(doubledNumbers) // 4, 6, 10

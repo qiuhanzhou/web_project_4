@@ -1,4 +1,4 @@
-class Section {
+export default class Section {
   constructor({ items, renderer }, containerSelector) {
     this._renderedItems = items
     this._renderer = renderer
@@ -7,7 +7,7 @@ class Section {
 
   //a public method that takes a DOM element and adds it to the container.
   addItem(element) {
-    this._container.append(element)
+    this._container.prepend(element)
   }
 
   clear() {
