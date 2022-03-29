@@ -1,12 +1,12 @@
 export const editProfileModal = document.querySelector('#edit-profile-modal')
 export const allModals = document.querySelectorAll('.modal')
 export const editProfileButton = document.querySelector('.profile__edit-button')
-export const profileNameEl = document.querySelector('.profile__name')
-export const profileTitleEl = document.querySelector('.profile__title')
+export const profileName = document.querySelector('.profile__name')
+export const profileTitile = document.querySelector('.profile__title')
 export const addCardButton = document.querySelector('.profile__add-button')
 export const editProfileModalForm = document.getElementById('edit-profile')
 export const addCardModalForm = document.getElementById('add-card')
-export const modalButtons = document.querySelectorAll('.modal__close-button')
+export const modalButtons = document.querySelectorAll('.modal')n
 
 export const initialCards = [
   {
