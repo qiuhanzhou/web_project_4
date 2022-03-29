@@ -21,7 +21,7 @@
   }
 }
 
-.modal__submit-button:hover {
+.modal__submit-button:hover:not(:disabled) {
   cursor: pointer;
   opacity: 0.8;
 }

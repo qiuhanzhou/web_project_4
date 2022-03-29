@@ -3,7 +3,7 @@ export default class Card {
     this._title = name
     this._imageUrl = link
     this._cardSelector = cardSelector
-    this.handleCardClick = handleCardClick
+    this._handleCardClick = handleCardClick
   }
 
   _getTemplate() {
@@ -29,23 +29,21 @@ export default class Card {
     return this._element
   }
 
-  _handleModalClose(e) {
+  _handleDelete() {
     this._element.remove()
   }
 
-  _handleModalToggleLike(e) {
+  _handleToggleLike = (e) => {
     e.target.classList.toggle('card__like-button_full')
   }
 
   _setEventListeners() {
     this._cardImage.addEventListener('click', () => {
-      this.handleCardClick({ url: this._imageUrl, title: this._title })
+      this._handleCardClick({ url: this._imageUrl, title: this._title })
     })
     this._deleteButton.addEventListener('click', (e) => {
-      this._handleModalClose(e)
+      this._handleDelete()
     })
-    this._likeButton.addEventListener('click', (e) => {
-      this._handleModalToggleLike(e)
-    })
+    this._likeButton.addEventListener('click', this._handleToggleLike)
   }
 }

@@ -19,6 +19,11 @@ import PopupWithImage from '../components/PopupWithImage'
 import PopupWithForm from '../components/PopupWithForm'
 import UserInfo from '../components/UserInfo'
 
+const renderCard = (card) => {
+  const cardEl = card.generateCard()
+  cardSection.addItem(cardEl)
+}
+
 //create instances of the classes
 
 const cardSection = new Section(
@@ -26,8 +31,7 @@ const cardSection = new Section(
     items: initialCards,
     renderer: (item) => {
       const card = new Card(item, selectors.cardTemplate, handleCardClick)
-      const cardEl = card.generateCard()
-      cardSection.addItem(cardEl)
+      renderCard(card)
     },
   },
   selectors.cardContainerSelector,
@@ -38,8 +42,7 @@ const editFormValidator = new FormValidator(
   editProfileModalForm,
 )
 
-const imagepopup = new PopupWithImage(selectors.imagePopupSelector)
-imagepopup.setEventListeners()
+const imagePopup = new PopupWithImage(selectors.imagePopupSelector)
 
 const editProfilePopup = new PopupWithForm(
   handleEditFormSubmit,
@@ -61,10 +64,10 @@ const profileUserInfo = new UserInfo({
 //callbacks passed in as class constructor params
 
 function handleCardClick(data) {
-  imagepopup.open(data)
+  imagePopup.open(data)
 }
 
-function handleEditFormSubmit([userName, title]) {
+function handleEditFormSubmit({ name: userName, about: title }) {
   profileUserInfo.setUserInfo({
     userName,
     title,
@@ -72,22 +75,23 @@ function handleEditFormSubmit([userName, title]) {
   editProfilePopup.close()
 }
 
-function handleAddCardFormSubmit([name, link]) {
+function handleAddCardFormSubmit({ title: name, url: link }) {
   const card = new Card({ name, link }, selectors.cardTemplate, handleCardClick)
-  const cardEl = card.generateCard()
-  cardSection.addItem(cardEl)
+  renderCard(card)
   addCardPopup.close()
 }
 
 //initialize all my classes
 cardSection.renderItems()
 
+addFormValidator.enableValidation()
+editFormValidator.enableValidation()
+
 editProfileButton.addEventListener('click', () => {
+  editFormValidator.updateButtonState()
   editProfilePopup.open()
 })
 addCardButton.addEventListener('click', () => {
+  addFormValidator.updateButtonState()
   addCardPopup.open()
 })
-
-addFormValidator.enableValidation()
-editFormValidator.enableValidation()
