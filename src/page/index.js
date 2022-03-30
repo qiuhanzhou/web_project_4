@@ -88,9 +88,11 @@ editFormValidator.enableValidation()
 
 editProfileButton.addEventListener('click', () => {
   editFormValidator.updateButtonState()
-  const userInfo = profileUserInfo.getUserInfo()
-  editProfilePopup._allInputs[0].value = userInfo.userName
-  editProfilePopup._allInputs[1].value = userInfo.title
+  const currentUserInfo = profileUserInfo.getUserInfo()
+  const userNameInput = editProfileModalForm.name
+  const userJobInput = editProfileModalForm.about
+  userNameInput.value = currentUserInfo.userName
+  userJobInput.value = currentUserInfo.title
   editProfilePopup.open()
 })
 addCardButton.addEventListener('click', () => {
