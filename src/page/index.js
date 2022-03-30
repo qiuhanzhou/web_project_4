@@ -19,7 +19,8 @@ import PopupWithImage from '../components/PopupWithImage'
 import PopupWithForm from '../components/PopupWithForm'
 import UserInfo from '../components/UserInfo'
 
-const renderCard = (card) => {
+const renderCard = (item) => {
+  const card = new Card(item, selectors.cardTemplate, handleCardClick)
   const cardEl = card.generateCard()
   cardSection.addItem(cardEl)
 }
@@ -30,8 +31,7 @@ const cardSection = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(item, selectors.cardTemplate, handleCardClick)
-      renderCard(card)
+      renderCard(item)
     },
   },
   selectors.cardContainerSelector,
@@ -76,8 +76,7 @@ function handleEditFormSubmit({ name: userName, about: title }) {
 }
 
 function handleAddCardFormSubmit({ title: name, url: link }) {
-  const card = new Card({ name, link }, selectors.cardTemplate, handleCardClick)
-  renderCard(card)
+  renderCard({ name, link })
   addCardPopup.close()
 }
 
@@ -89,6 +88,9 @@ editFormValidator.enableValidation()
 
 editProfileButton.addEventListener('click', () => {
   editFormValidator.updateButtonState()
+  const userInfo = profileUserInfo.getUserInfo()
+  editProfilePopup._allInputs[0].value = userInfo.userName
+  editProfilePopup._allInputs[1].value = userInfo.title
   editProfilePopup.open()
 })
 addCardButton.addEventListener('click', () => {
