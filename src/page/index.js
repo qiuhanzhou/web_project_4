@@ -168,7 +168,6 @@ addCardButton.addEventListener('click', () => {
 })
 
 updateProfilePicButton.addEventListener('click', () => {
-  console.log('update ran')
   updateProfilePicPopup.open()
 })
 
@@ -201,11 +200,3 @@ const deleteCardPopup = new PopupWithConfirmation(
 )
 
 deleteCardPopup.setEventListeners()
-
-// function deleteFormSubmit() {
-//   api.deleteCard().catch((err) => {
-//     console.log(`can't set user info: ${err}`)
-//   })
-
-//   editProfilePopup.close()
-// }
