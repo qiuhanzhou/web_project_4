@@ -1,6 +1,5 @@
 export default class Section {
-  constructor({ items, renderer }, containerSelector) {
-    this._items = items
+  constructor(renderer, containerSelector) {
     this._renderer = renderer
     this._container = document.querySelector(containerSelector)
   }
@@ -15,10 +14,10 @@ export default class Section {
   }
 
   //a public method that renders all elements on the page. The renderer() function will render each element on a page.
-  renderItems() {
+  renderItems(items) {
     this.clear()
-    this._items.forEach((item) => {
-      this._renderer(item)
-    })
+    for (let i = items.length - 1; i >= 0; i--) {
+      this._renderer(items[i])
+    }
   }
 }

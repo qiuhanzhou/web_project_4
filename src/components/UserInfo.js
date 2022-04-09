@@ -10,8 +10,8 @@ export default class UserInfo {
     }
   }
 
-  setUserInfo({ userName, title }) {
-    this._userName.textContent = userName
-    this._userTitle.textContent = title
+  setUserInfo({ name, about }) {
+    this._userName.textContent = name
+    this._userTitle.textContent = about
   }
 }
