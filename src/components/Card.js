@@ -46,12 +46,7 @@ export default class Card {
     // check if my user id is in the likes
     // if yes add 'card__like-button_full' to the like button
 
-    console.log('cardID: ', this._id)
-    console.log('userId: ', this._userId)
-    console.log('ownerId: ', this._owner._id)
-
     this._likes.forEach((likeUser) => {
-      console.log(likeUser._id)
       if (likeUser._id === this._userId) {
         this._likeButton.classList.add('card__like-button_full')
       }
@@ -75,18 +70,28 @@ export default class Card {
     // have I liked?
     if (this._likeButton.classList.contains('card__like-button_full')) {
       // yes then call unlike
-      this._api.unlikeCard(this._id).then((card) => {
-        this._likes = card.likes
-        this._updateLikesCount()
-        this._likeButton.classList.remove('card__like-button_full')
-      })
+      this._api
+        .unlikeCard(this._id)
+        .then((card) => {
+          this._likes = card.likes
+          this._updateLikesCount()
+          this._likeButton.classList.remove('card__like-button_full')
+        })
+        .catch((err) => {
+          console.log(`Cannot unlike the card: Error ${err}`)
+        })
     } else {
       // no then call like
-      this._api.likeCard(this._id).then((card) => {
-        this._likes = card.likes
-        this._updateLikesCount()
-        this._likeButton.classList.add('card__like-button_full')
-      })
+      this._api
+        .likeCard(this._id)
+        .then((card) => {
+          this._likes = card.likes
+          this._updateLikesCount()
+          this._likeButton.classList.add('card__like-button_full')
+        })
+        .catch((err) => {
+          console.log(`Cannot like the card: Error ${err}`)
+        })
     }
   }
 

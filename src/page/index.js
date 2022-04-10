@@ -23,7 +23,16 @@ import PopupWithConfirmation from '../components/PopupWithConfirmation'
 import UserInfo from '../components/UserInfo'
 import Api from '../components/Api'
 
-let userId
+let userInfo
+let profileUserInfo
+
+const cardSection = new Section(
+  (item) => {
+    renderCard(item)
+  },
+
+  selectors.cardContainerSelector,
+)
 
 const imagePopup = new PopupWithImage(selectors.imagePopupSelector)
 const editProfilePopup = new PopupWithForm(
@@ -58,23 +67,10 @@ addFormValidator.enableValidation()
 editFormValidator.enableValidation()
 updateProfileFormValidator.enableValidation()
 
-const profileUserInfo = new UserInfo({
-  userNameElement: profileNameEl,
-  userTitleElement: profileTitleEl,
-})
-
-const cardSection = new Section(
-  (item) => {
-    renderCard(item)
-  },
-
-  selectors.cardContainerSelector,
-)
-
 const renderCard = (cardResult) => {
   const card = new Card(
     cardResult,
-    userId,
+    userInfo._id,
     selectors.cardTemplate,
     handleCardClick,
     api,
@@ -82,7 +78,6 @@ const renderCard = (cardResult) => {
     handleDeleteCardFormSubmit,
   )
   const cardEl = card.generateCard()
-  console.log(card._likeDiv)
   cardSection.addItem(cardEl)
 }
 
@@ -98,12 +93,9 @@ function handleEditFormSubmit({ name, about }) {
       name,
       about,
     })
-    .then(() => {
+    .then((res) => {
       //update UI
-      profileUserInfo.setUserInfo({
-        name,
-        about,
-      })
+      profileUserInfo.setUserInfo(res)
       editProfilePopup.close()
     })
     .catch((err) => {
@@ -118,24 +110,23 @@ function handleAddCardFormSubmit({ title: name, url: link }) {
       if (renderCard != undefined) {
         renderCard(res)
       }
+      addCardPopup.close()
     })
     .catch((err) => {
       console.log(`can't add new card: ${err}`)
     })
-  addCardPopup.close()
 }
 
 function handleUpdateProfileFormSubmit({ url: link }) {
   api
     .updateProfilePicture(link)
-    .then(() => {
-      //update DOM profile pic
-      profileAvatarEl.src = link
+    .then((res) => {
+      profileUserInfo.setUserInfo(res)
+      updateProfilePicPopup.close()
     })
     .catch((err) => {
       console.log(`can't update user profile picture: ${err}`)
     })
-  updateProfilePicPopup.close()
 }
 
 function handleCardDeleteClick(cardId, element) {
@@ -145,11 +136,13 @@ function handleCardDeleteClick(cardId, element) {
 function handleDeleteCardFormSubmit(cardId, element) {
   api
     .deleteCard(cardId)
-    .then(() => element.remove())
+    .then(() => {
+      element.remove()
+      deleteCardPopup.close()
+    })
     .catch((err) => {
       console.log(`can't delete card: ${err}`)
     })
-  deleteCardPopup.close()
 }
 
 //add event listeners to buttons
@@ -168,6 +161,7 @@ addCardButton.addEventListener('click', () => {
 })
 
 updateProfilePicButton.addEventListener('click', () => {
+  updateProfileFormValidator.updateButtonState()
   updateProfilePicPopup.open()
 })
 
@@ -181,13 +175,17 @@ const api = new Api({
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then((values) => {
-    const [user, initialCards] = values
-    console.log(initialCards)
-    const { name, about, avatar, _id } = user
-    profileAvatarEl.src = avatar
-    profileNameEl.textContent = name
-    profileTitleEl.textContent = about
-    userId = _id
+    const [initialUserInfo, initialCards] = values
+    userInfo = initialUserInfo
+    profileUserInfo = new UserInfo(
+      {
+        userNameElement: profileNameEl,
+        userTitleElement: profileTitleEl,
+        userAvatarElement: profileAvatarEl,
+      },
+      userInfo,
+    )
+    profileUserInfo.setUserInfo(userInfo)
     cardSection.renderItems(initialCards)
   })
   .catch((err) => {
